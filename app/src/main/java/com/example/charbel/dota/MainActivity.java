@@ -1,5 +1,6 @@
 package com.example.charbel.dota;
 
+import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
 import android.support.design.widget.NavigationView;
@@ -17,6 +18,9 @@ import android.view.View;
 import android.widget.ImageView;
 import android.widget.TextView;
 
+import com.example.charbel.dota.fragments.BaseFragment;
+import com.example.charbel.dota.fragments.LoginFragment;
+import com.example.charbel.dota.fragments.RegisterFragment;
 import com.example.charbel.dota.fragments.UserHome;
 //import com.example.charbel.dota.fragments.UserHome$HeroListAdapter$ViewHolder_ViewBinding;
 import com.example.charbel.dota.fragments.UserHome.HeroListAdapter;
@@ -28,22 +32,25 @@ import com.example.charbel.dota.services.HeroFragAdapter;
 
 import java.util.List;
 
+import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity {
+public class MainActivity extends AppCompatActivity{
     private DeviceStorageManager deviceStorageManager;
     private HeroListAdapter mSections;
     private RecyclerView mView;
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         deviceStorageManager = new DeviceStorageManager(this);
         super.onCreate(savedInstanceState);
-        displayHeroes();
+        setContentView(R.layout.base_frag);
+//        displayHeroes();
 //        NavigationView navigationView1 = findViewById(R.id.nav_view);
 //        View header = navigationView1.getHeaderView(0);
 ////        profilePictureImageView = header.findViewById(R.id.profile_picture);
@@ -77,6 +84,16 @@ public class MainActivity extends AppCompatActivity {
 //        }
 
     }
+//    @OnClick(R.id.login_frag_button)
+//    public void goToReg() {
+//        RegisterFragment fragment = new RegisterFragment();
+//
+//        getFragmentManager()
+//                .beginTransaction()
+//                .replace(R.id.container_fragments, fragment)
+//                .commit();
+//    }
+
     public void displayHeroes(){
 
         setContentView(R.layout.hero_frag);
@@ -159,5 +176,6 @@ public class MainActivity extends AppCompatActivity {
         startActivity(intent);
         finish();
     }
+
 
 }
