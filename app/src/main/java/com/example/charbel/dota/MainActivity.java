@@ -41,7 +41,44 @@ public class MainActivity extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
-        deviceStorageManager = new DeviceStorageManager(this);super.onCreate(savedInstanceState);
+        deviceStorageManager = new DeviceStorageManager(this);
+        super.onCreate(savedInstanceState);
+        displayHeroes();
+//        NavigationView navigationView1 = findViewById(R.id.nav_view);
+//        View header = navigationView1.getHeaderView(0);
+////        profilePictureImageView = header.findViewById(R.id.profile_picture);
+////        nameHeaderTextView = header.findViewById(R.id.name);
+////        emailHeaderTextView = header.findViewById(R.id.email);
+//
+//        Toolbar toolbar = findViewById(R.id.toolbar);
+//        setSupportActionBar(toolbar);
+//
+//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
+////        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
+////                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
+////        drawer.addDrawerListener(toggle);
+////        toggle.syncState();
+//
+//        NavigationView navigationView = findViewById(R.id.nav_view);
+//        navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
+
+//        super.onCreate(savedInstanceState);
+//        setContentView(R.layout.activity_main);
+//
+//        if(deviceStorageManager.getUser()==null){
+//            setContentView(R.layout.activity_user);
+//            UserHome details = new UserHome();
+//            details.setArguments(getIntent().getExtras());
+//            getFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
+//
+//        }
+//        else{
+//            setContentView(R.layout.content_user);
+//        }
+
+    }
+    public void displayHeroes(){
+
         setContentView(R.layout.hero_frag);
 
         deviceStorageManager = DeviceStorageManager.getInstance(this);
@@ -80,41 +117,9 @@ public class MainActivity extends AppCompatActivity {
 
             @Override
             public void onFailure(Call<List<Hero>> call, Throwable t) {
-
+                setContentView(R.layout.error_no_connection);
             }
         });
-//        NavigationView navigationView1 = findViewById(R.id.nav_view);
-//        View header = navigationView1.getHeaderView(0);
-////        profilePictureImageView = header.findViewById(R.id.profile_picture);
-////        nameHeaderTextView = header.findViewById(R.id.name);
-////        emailHeaderTextView = header.findViewById(R.id.email);
-//
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//
-//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-////        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-////                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-////        drawer.addDrawerListener(toggle);
-////        toggle.syncState();
-//
-//        NavigationView navigationView = findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
-
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//
-//        if(deviceStorageManager.getUser()==null){
-//            setContentView(R.layout.activity_user);
-//            UserHome details = new UserHome();
-//            details.setArguments(getIntent().getExtras());
-//            getFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
-//
-//        }
-//        else{
-//            setContentView(R.layout.content_user);
-//        }
-
     }
     @SuppressWarnings("StatementWithEmptyBody")
     public boolean onNavigationItemSelected(MenuItem item) {
