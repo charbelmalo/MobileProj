@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="utf-8"?>
+<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+
+
+
+    <android.support.v7.widget.CardView
+    android:layout_width="match_parent"
+    android:layout_height="200dp">
+    <ImageView
+        android:id="@+id/hero_icon"
+        android:layout_width="200dp"
+        android:layout_height="180dp"
+        android:layout_marginTop="10dp"
+        android:scaleType="fitCenter"
+        app:srcCompat="@drawable/ic_launcher_background"/>
+
+        <TextView
+            android:id="@+id/hero_name"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="208dp"
+            android:text="Hero Name"
+            android:textSize="20dp"
+            android:textStyle="bold" />
+
+        <TextView
+            android:id="@+id/hero_attr"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="208dp"
+            android:layout_marginTop="30dp"
+            android:text="Hero Attribute" />
+
+        <TextView
+            android:id="@+id/hero_attack"
+            android:layout_width="match_parent"
+            android:layout_height="match_parent"
+            android:layout_marginLeft="208dp"
+            android:layout_marginTop="50dp"
+            android:text="Hero Attack Type" />
+
+        <Button
+            android:id="@+id/details"
+            android:layout_width="100dp"
+            android:layout_height="50dp"
+            android:layout_marginLeft="270dp"
+            android:layout_marginTop="140dp"
+            android:background="?android:attr/colorEdgeEffect"
+            android:text="Details"
+            android:textAlignment="center"
+            android:textColor="#FFF" />
+
+</android.support.v7.widget.CardView>
+</LinearLayout>
