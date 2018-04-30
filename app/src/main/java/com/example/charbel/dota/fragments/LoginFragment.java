@@ -48,13 +48,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 public class LoginFragment extends Fragment {
     private DeviceStorageManager deviceStorageManager;
 
-    @Override
-    public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState){
-
-            return inflater.inflate(R.layout.login_frag,container,false);
-
-
-    }
     private LoginFragmentListener listener;
     private AuthenticationApiManager authenticationApiManager;
     private DeviceStorageManager localStorageManager;
@@ -97,13 +90,13 @@ public class LoginFragment extends Fragment {
         showProgressBar();
     }
 
-//    @Override
-//    public View onCreateView(LayoutInflater inflater, ViewGroup container,
-//                             Bundle savedInstanceState) {
-//        View view = inflater.inflate(R.layout.fragment_login, container, false);
-//        ButterKnife.bind(this, view);
-//        return view;
-//    }
+    @Override
+    public View onCreateView(LayoutInflater inflater, ViewGroup container,
+                             Bundle savedInstanceState) {
+        View view = inflater.inflate(R.layout.login_frag, container, false);
+        ButterKnife.bind(this, view);
+        return view;
+    }
 
     @Override
     public void onViewCreated(View view, @Nullable Bundle savedInstanceState) {

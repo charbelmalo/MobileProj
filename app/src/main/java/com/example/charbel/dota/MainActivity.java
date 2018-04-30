@@ -57,7 +57,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         deviceStorageManager = new DeviceStorageManager(this);
-        deviceStorageManager.saveUser(new User("cc","cc","cc"));
+        deviceStorageManager.saveUser(new User("cc","cc"));
         super.onCreate(savedInstanceState);
         if(deviceStorageManager.getUser()!=null){
             setContentView(R.layout.base_frag);
