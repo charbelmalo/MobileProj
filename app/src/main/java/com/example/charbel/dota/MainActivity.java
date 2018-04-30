@@ -41,7 +41,7 @@ import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity{
+public class MainActivity extends AppCompatActivity implements LoginFragment.LoginFragmentListener{
     private DeviceStorageManager deviceStorageManager;
     private HeroListAdapter mSections;
     private RecyclerView mView;
@@ -49,49 +49,75 @@ public class MainActivity extends AppCompatActivity{
     private RegisterFragment mRegisterFragment;
     private TextView tvFirst;
     private TextView tvSecond;
+    private TextView logout;
+    private TextView register_go;
     private boolean tvFirstIsCheck=true;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         deviceStorageManager = new DeviceStorageManager(this);
+        deviceStorageManager.saveUser(new User("cc","cc","cc"));
         super.onCreate(savedInstanceState);
-//        if(deviceStorageManager.getUser()==null){
-//        setContentView(R.layout.base_frag);}
-//        else{
-//            setContentView(R.layout.hero_frag);
-//            displayHeroes();
-//        }
-        setContentView(R.layout.base_frag);
-        initFragment();
-        showFirstFragment();
-        tvFirst= findViewById(R.id.tvFirst);
-        tvSecond= findViewById(R.id.tvSecond);
+        if(deviceStorageManager.getUser()!=null){
+            setContentView(R.layout.base_frag);
+            initFragment();
+            showFirstFragment();
+            tvFirst= findViewById(R.id.tvFirst);
+            tvSecond= findViewById(R.id.tvSecond);
+            register_go = findViewById(R.id.register_text);
 
-        tvFirst.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                firstSelected();
-                showFirstFragment();
-            }
-        });
-        tvSecond.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                secondSelected();
-                showSecondFragment();
-            }
-        });
+            tvFirst.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    firstSelected();
+                    showFirstFragment();
+                }
+            });
+            tvSecond.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    secondSelected();
+                    showSecondFragment();
+                }
+            });
+//            register_go.setOnClickListener(new View.OnClickListener() {
+//                @Override
+//                public void onClick(View view) {
+//                    secondSelected();
+//                    showSecondFragment();
+//                }
+//            });
+        }
+        else{
+            setContentView(R.layout.hero_frag);
+            logout = findViewById(R.id.logout_button);
+            logout.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View view) {
+                    System.exit(0);
+                }
+            });
+            displayHeroes();
+
+        }
+
     }
     private void firstSelected(){
-//        tvFirst.setBackgroundResource(R.drawable.bg_selected);
-//        tvSecond.setBackgroundResource(R.drawable.bg_un_selected);
+
+        tvFirst= findViewById(R.id.tvFirst);
+        tvSecond= findViewById(R.id.tvSecond);
+        tvFirst.setBackgroundResource(R.drawable.bg_selected);
+        tvSecond.setBackgroundResource(R.drawable.bg_un_selected);
         tvFirstIsCheck=true;
     }
 
     private void secondSelected(){
-//        tvSecond.setBackgroundResource(R.drawable.bg_selected);
-//        tvFirst.setBackgroundResource(R.drawable.bg_un_selected);
+
+        tvFirst= findViewById(R.id.tvFirst);
+        tvSecond= findViewById(R.id.tvSecond);
+        tvSecond.setBackgroundResource(R.drawable.bg_selected);
+        tvFirst.setBackgroundResource(R.drawable.bg_un_selected);
         tvFirstIsCheck=false;
     }
 
@@ -100,7 +126,7 @@ public class MainActivity extends AppCompatActivity{
         mRegisterFragment= new RegisterFragment();
     }
 
-    @SuppressLint("ResourceType")
+
     private void showFirstFragment() {
         setTitle("Login");
         getFragmentManager()
@@ -110,7 +136,7 @@ public class MainActivity extends AppCompatActivity{
                 .commit();
         firstSelected();
     }
-    @SuppressLint("ResourceType")
+
     private void showSecondFragment(){
 
         setTitle("Register");
@@ -205,4 +231,18 @@ public class MainActivity extends AppCompatActivity{
     }
 
 
+    @Override
+    public void onLoginSuccess() {
+
+    }
+
+    @Override
+    public void onLoginFailure() {
+
+    }
+
+    @Override
+    public void onRequestRegister() {
+
+    }
 }
