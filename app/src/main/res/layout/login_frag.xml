@@ -9,14 +9,18 @@
         android:id="@+id/email_holder"
         android:layout_width="376dp"
         android:layout_height="wrap_content"
-        android:layout_marginTop="32dp"
+        android:layout_marginStart="100dp"
+        android:layout_marginTop="290dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toTopOf="parent">
+        app:layout_constraintTop_toTopOf="parent"
+        android:textColorHint="#FFF"
+        android:backgroundTint="#FFF"
+        >
 
         <EditText
             android:id="@+id/email"
-            android:layout_width="356dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
@@ -25,7 +29,8 @@
             android:hint="Email"
             android:inputType="textEmailAddress"
             android:textColorHighlight="@color/colorPrimary"
-            android:textColorLink="?android:attr/colorMultiSelectHighlight" />
+            android:textColorLink="#FFF"
+            android:backgroundTint="#FFF"/>
 
     </android.support.design.widget.TextInputLayout>
 
@@ -33,13 +38,17 @@
         android:id="@+id/password_holder"
         android:layout_width="374dp"
         android:layout_height="59dp"
+        android:layout_marginStart="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/email_holder">
+        app:layout_constraintTop_toBottomOf="@+id/email_holder"
+        android:textColorHint="#FFF"
+        android:backgroundTint="#FFF" >
 
         <EditText
+            android:textColor="#FFF"
             android:id="@+id/password"
-            android:layout_width="354dp"
+            android:layout_width="250dp"
             android:layout_height="wrap_content"
             android:layout_marginEnd="8dp"
             android:layout_marginStart="8dp"
@@ -47,7 +56,8 @@
             android:ems="10"
             android:hint="Password"
             android:inputType="textPassword"
-            android:textColorLink="@android:color/holo_orange_dark" />
+            android:textColorLink="#FFF"
+            android:backgroundTint="#FFF" />
 
     </android.support.design.widget.TextInputLayout>
 
@@ -69,7 +79,7 @@
         android:layout_height="wrap_content"
         android:layout_marginTop="8dp"
         android:text="Don't have an account?"
-        android:textColor="#000"
+        android:textColor="#FFF"
         app:layout_constraintStart_toStartOf="@+id/login_frag_button"
         app:layout_constraintTop_toBottomOf="@+id/login_frag_button" />
 

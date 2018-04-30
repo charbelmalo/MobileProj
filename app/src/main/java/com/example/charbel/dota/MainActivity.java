@@ -1,5 +1,6 @@
 package com.example.charbel.dota;
 
+import android.annotation.SuppressLint;
 import android.app.Activity;
 import android.app.Fragment;
 import android.content.Intent;
@@ -15,6 +16,7 @@ import android.support.v7.widget.RecyclerView;
 import android.support.v7.widget.Toolbar;
 import android.view.MenuItem;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 
@@ -43,57 +45,91 @@ public class MainActivity extends AppCompatActivity{
     private DeviceStorageManager deviceStorageManager;
     private HeroListAdapter mSections;
     private RecyclerView mView;
+    private LoginFragment mLoginfragment;
+    private RegisterFragment mRegisterFragment;
+    private TextView tvFirst;
+    private TextView tvSecond;
+    private boolean tvFirstIsCheck=true;
 
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         deviceStorageManager = new DeviceStorageManager(this);
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.base_frag);
-//        displayHeroes();
-//        NavigationView navigationView1 = findViewById(R.id.nav_view);
-//        View header = navigationView1.getHeaderView(0);
-////        profilePictureImageView = header.findViewById(R.id.profile_picture);
-////        nameHeaderTextView = header.findViewById(R.id.name);
-////        emailHeaderTextView = header.findViewById(R.id.email);
-//
-//        Toolbar toolbar = findViewById(R.id.toolbar);
-//        setSupportActionBar(toolbar);
-//
-//        DrawerLayout drawer = findViewById(R.id.drawer_layout);
-////        ActionBarDrawerToggle toggle = new ActionBarDrawerToggle(
-////                this, drawer, toolbar, R.string.navigation_drawer_open, R.string.navigation_drawer_close);
-////        drawer.addDrawerListener(toggle);
-////        toggle.syncState();
-//
-//        NavigationView navigationView = findViewById(R.id.nav_view);
-//        navigationView.setNavigationItemSelectedListener((NavigationView.OnNavigationItemSelectedListener) this);
-
-//        super.onCreate(savedInstanceState);
-//        setContentView(R.layout.activity_main);
-//
 //        if(deviceStorageManager.getUser()==null){
-//            setContentView(R.layout.activity_user);
-//            UserHome details = new UserHome();
-//            details.setArguments(getIntent().getExtras());
-//            getFragmentManager().beginTransaction().add(android.R.id.content, details).commit();
-//
-//        }
+//        setContentView(R.layout.base_frag);}
 //        else{
-//            setContentView(R.layout.content_user);
+//            setContentView(R.layout.hero_frag);
+//            displayHeroes();
 //        }
+        setContentView(R.layout.base_frag);
+        initFragment();
+        showFirstFragment();
+        tvFirst= findViewById(R.id.tvFirst);
+        tvSecond= findViewById(R.id.tvSecond);
 
+        tvFirst.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                firstSelected();
+                showFirstFragment();
+            }
+        });
+        tvSecond.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                secondSelected();
+                showSecondFragment();
+            }
+        });
     }
-//    @OnClick(R.id.login_frag_button)
-//    public void goToReg() {
-//        RegisterFragment fragment = new RegisterFragment();
-//
-//        getFragmentManager()
-//                .beginTransaction()
-//                .replace(R.id.container_fragments, fragment)
-//                .commit();
-//    }
+    private void firstSelected(){
+//        tvFirst.setBackgroundResource(R.drawable.bg_selected);
+//        tvSecond.setBackgroundResource(R.drawable.bg_un_selected);
+        tvFirstIsCheck=true;
+    }
 
+    private void secondSelected(){
+//        tvSecond.setBackgroundResource(R.drawable.bg_selected);
+//        tvFirst.setBackgroundResource(R.drawable.bg_un_selected);
+        tvFirstIsCheck=false;
+    }
+
+    private void initFragment() {
+        mLoginfragment= new LoginFragment();
+        mRegisterFragment= new RegisterFragment();
+    }
+
+    @SuppressLint("ResourceType")
+    private void showFirstFragment() {
+        setTitle("Login");
+        getFragmentManager()
+                .beginTransaction()
+//                .setCustomAnimations(R.anim.left_in, R.anim.left_out)
+                .replace(R.id.main_layout, mLoginfragment)
+                .commit();
+        firstSelected();
+    }
+    @SuppressLint("ResourceType")
+    private void showSecondFragment(){
+
+        setTitle("Register");
+        getFragmentManager()
+                .beginTransaction()
+//                .setCustomAnimations(R.anim.right_in, R.anim.right_out, R.anim.left_in, R.anim.left_out)
+                .replace(R.id.main_layout, mRegisterFragment)
+                .commit();
+        firstSelected();
+        secondSelected();
+    }
+
+    @Override public void onBackPressed() {
+        if(!tvFirstIsCheck) {
+            firstSelected();
+            tvFirstIsCheck=true;;
+        }
+        super.onBackPressed();
+    }
     public void displayHeroes(){
 
         setContentView(R.layout.hero_frag);
@@ -116,18 +152,10 @@ public class MainActivity extends AppCompatActivity{
                 TextView name;
 //                addHeroesList(heroes);
                 name = (TextView) findViewById(R.id.hero_name);
-//                name.setText(heroes.get(2).getLocalized_name());
                 RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.list);
-
-                // use this setting to improve performance if you know that changes
-                // in content do not change the layout size of the RecyclerView
                 mRecyclerView.setHasFixedSize(false);
-
-                // use a linear layout manager
                 RecyclerView.LayoutManager mLayoutManager = new LinearLayoutManager(getParent());
                 mRecyclerView.setLayoutManager(mLayoutManager);
-
-                // specify an adapter (see also next example)
                 RecyclerView.Adapter mAdapter = new RecyclerAdapter(heroes);
                 mRecyclerView.setAdapter(mAdapter);
             }
@@ -167,7 +195,6 @@ public class MainActivity extends AppCompatActivity{
          pager.setAdapter(new HeroFragAdapter(getSupportFragmentManager()));
         Intent intent = new Intent(this,UserHome.class);
         startActivity(intent);
-//        getFragmentManager().beginTransaction().replace(R.id.container, fragment).commit();
     }
 
     private void logout() {

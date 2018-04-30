@@ -25,7 +25,7 @@ import java.util.List;
  * Created by Charbel on 29/04/2018.
  */
 
-class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
+public class RecyclerAdapter extends RecyclerView.Adapter<RecyclerAdapter.ViewHolder> {
     private static final String TAG = "recycler";
     private List<Hero> heroes;
     private RecyclerView.ViewHolder holder;
