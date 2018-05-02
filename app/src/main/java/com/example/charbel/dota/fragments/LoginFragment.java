@@ -47,7 +47,6 @@ import retrofit2.converter.gson.GsonConverterFactory;
 
 public class LoginFragment extends Fragment {
     private DeviceStorageManager deviceStorageManager;
-
     private LoginFragmentListener listener;
     private AuthenticationApiManager authenticationApiManager;
     private DeviceStorageManager localStorageManager;
@@ -80,8 +79,15 @@ public class LoginFragment extends Fragment {
     public static LoginFragment newInstance() {
         LoginFragment fragment = new LoginFragment();
         return fragment;
-    }
 
+    }
+    @OnClick(R.id.login_frag_button)
+    public void goToHome(){
+        deviceStorageManager.saveUser(new User("cc","cc"));
+
+        Intent intent = new Intent(getContext(), MainActivity.class);
+        startActivity(intent);
+    }
     @Override
     public void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -190,6 +196,9 @@ public class LoginFragment extends Fragment {
     }
 
     private void hideProgressBar() {
+    }
+    public void setDeviceStorageManager(DeviceStorageManager a){
+        deviceStorageManager = a;
     }
 
     public interface LoginFragmentListener {

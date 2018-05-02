@@ -3,7 +3,7 @@ package com.example.charbel.dota.models;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * @author Charbel
+ * @author User
  */
 
 public class User {

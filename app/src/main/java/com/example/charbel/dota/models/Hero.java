@@ -3,7 +3,7 @@ package com.example.charbel.dota.models;
 import com.google.gson.annotations.SerializedName;
 
 /**
- * Created by Charbel on 28/04/2018.
+ * Created by User on 28/04/2018.
  */
 
 public class Hero {

@@ -1,26 +1,18 @@
 package com.example.charbel.dota;
 
-import android.annotation.SuppressLint;
-import android.app.Activity;
-import android.app.Fragment;
 import android.content.Intent;
-import android.support.design.widget.NavigationView;
 import android.support.v4.view.GravityCompat;
 import android.support.v4.view.ViewPager;
 import android.support.v4.widget.DrawerLayout;
-import android.support.v7.app.ActionBarDrawerToggle;
 import android.support.v7.app.AppCompatActivity;
 import android.os.Bundle;
 import android.support.v7.widget.LinearLayoutManager;
 import android.support.v7.widget.RecyclerView;
-import android.support.v7.widget.Toolbar;
+import android.util.Log;
 import android.view.MenuItem;
 import android.view.View;
-import android.widget.Button;
-import android.widget.ImageView;
 import android.widget.TextView;
 
-import com.example.charbel.dota.fragments.BaseFragment;
 import com.example.charbel.dota.fragments.LoginFragment;
 import com.example.charbel.dota.fragments.RegisterFragment;
 import com.example.charbel.dota.fragments.UserHome;
@@ -34,14 +26,13 @@ import com.example.charbel.dota.services.HeroFragAdapter;
 
 import java.util.List;
 
-import butterknife.OnClick;
 import retrofit2.Call;
 import retrofit2.Callback;
 import retrofit2.Response;
 import retrofit2.Retrofit;
 import retrofit2.converter.gson.GsonConverterFactory;
 
-public class MainActivity extends AppCompatActivity implements LoginFragment.LoginFragmentListener{
+public class MainActivity extends AppCompatActivity implements LoginFragment.LoginFragmentListener {
     private DeviceStorageManager deviceStorageManager;
     private HeroListAdapter mSections;
     private RecyclerView mView;
@@ -56,13 +47,14 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
+
         deviceStorageManager = new DeviceStorageManager(this);
-        deviceStorageManager.saveUser(new User("cc","cc"));
         super.onCreate(savedInstanceState);
-        if(deviceStorageManager.getUser()!=null){
+        if(deviceStorageManager.getUser()==null){
             setContentView(R.layout.base_frag);
             initFragment();
             showFirstFragment();
+
             tvFirst= findViewById(R.id.tvFirst);
             tvSecond= findViewById(R.id.tvSecond);
             register_go = findViewById(R.id.register_text);
@@ -81,27 +73,11 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
                     showSecondFragment();
                 }
             });
-//            register_go.setOnClickListener(new View.OnClickListener() {
-//                @Override
-//                public void onClick(View view) {
-//                    secondSelected();
-//                    showSecondFragment();
-//                }
-//            });
         }
         else{
             setContentView(R.layout.hero_frag);
-            logout = findViewById(R.id.logout_button);
-            logout.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View view) {
-                    System.exit(0);
-                }
-            });
             displayHeroes();
-
         }
-
     }
     private void firstSelected(){
 
@@ -123,6 +99,7 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
 
     private void initFragment() {
         mLoginfragment= new LoginFragment();
+        mLoginfragment.setDeviceStorageManager(deviceStorageManager);
         mRegisterFragment= new RegisterFragment();
     }
 
@@ -131,7 +108,6 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
         setTitle("Login");
         getFragmentManager()
                 .beginTransaction()
-//                .setCustomAnimations(R.anim.left_in, R.anim.left_out)
                 .replace(R.id.main_layout, mLoginfragment)
                 .commit();
         firstSelected();
@@ -142,7 +118,6 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
         setTitle("Register");
         getFragmentManager()
                 .beginTransaction()
-//                .setCustomAnimations(R.anim.right_in, R.anim.right_out, R.anim.left_in, R.anim.left_out)
                 .replace(R.id.main_layout, mRegisterFragment)
                 .commit();
         firstSelected();
@@ -176,7 +151,6 @@ public class MainActivity extends AppCompatActivity implements LoginFragment.Log
             public void onResponse(Call<List<Hero>> call, Response<List<Hero>> response) {
                 List<Hero> heroes = response.body();
                 TextView name;
-//                addHeroesList(heroes);
                 name = (TextView) findViewById(R.id.hero_name);
                 RecyclerView mRecyclerView = (RecyclerView) findViewById(R.id.list);
                 mRecyclerView.setHasFixedSize(false);

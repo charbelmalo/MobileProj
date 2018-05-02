@@ -26,6 +26,10 @@
             android:name="com.example.charbel.dota.fragments.HeroDetails"
             android:label="Details"
            ></activity>
+        <activity
+            android:name="com.example.charbel.dota.fragments.BaseFragment"
+            android:label="Details"
+            ></activity>
     </application>
 
 </manifest>
